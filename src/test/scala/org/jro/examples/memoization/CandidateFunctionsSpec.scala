@@ -17,7 +17,7 @@ class CandidateFunctionsSpec extends FreeSpec with Matchers{
 		}
 	}
 
-	"Counting.fibonacci" - {
+	/*"Counting.fibonacci" - {
 		"should give the fibonacci suite recurse a lot" in {
 			Counting.fibonaciCalls = 0
 			(0 to 8).map(Counting.fibonacci) should contain theSameElementsInOrderAs Seq(0, 1, 1, 2, 3, 5, 8, 13, 21)
@@ -27,7 +27,7 @@ class CandidateFunctionsSpec extends FreeSpec with Matchers{
 			Counting.fibonacci(6) shouldBe 8
 			Counting.fibonaciCalls shouldBe 15
 		}
-	}
+	}*/
 
 	"square" - {
 		"should give the square of the input value when no overflow occurs" in {

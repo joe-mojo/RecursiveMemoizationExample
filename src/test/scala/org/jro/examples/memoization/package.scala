@@ -25,5 +25,11 @@ package object memoization {
 	}
 	object CountCalls {
 		def apply[T, R](f: T => R): CountCalls[T, R] = new CountCalls(f)
+
+		def Y[T, R](f: (T, T => R) => R) = {
+			var yf: T => R = null
+			yf = CountCalls(f(_, yf))
+			yf
+		}
 	}
 }

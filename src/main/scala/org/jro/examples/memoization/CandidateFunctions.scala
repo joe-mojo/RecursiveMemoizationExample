@@ -20,7 +20,7 @@ object CandidateFunctions {
 		else if (n < 3) 1
 		else fibonacci(n - 2) + fibonacci(n - 1)
 
-	private object PseudoRecursive {
+	private[memoization] object PseudoRecursive {
 
 		def factorial(n: Int, recurse: Int => BigInt): BigInt = {
 			if(n < 2) 1 else BigInt(n) * recurse(n - 1)

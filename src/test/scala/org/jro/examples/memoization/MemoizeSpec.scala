@@ -87,10 +87,35 @@ class MemoizeSpec extends FreeSpec with Matchers{
 		}
 
 		"memoized with Y combinator should" - {
-			"call original function only once for each call" in {
+			"call original function only once for each value" in {
 				import CandidateFunctions._
-				//val callCountingFibonacci = Memoize.Y(C)
-				pending
+				var callCount = 0
+				def pseudoRecFibonacci(n: Int, recurse:  Int => Int): Int = {
+					callCount += 1
+					if(n==0) 0
+					else if(n < 3) 1
+					else recurse(n - 2) + recurse(n - 1)
+				}
+
+				var fibonacci: Int => Int = null
+				fibonacci = pseudoRecFibonacci(_, fibonacci)
+
+				fibonacci(5) shouldBe 5
+				callCount shouldBe 9
+
+				callCount = 0
+				val memoizedFibonacci = Memoize.Y(pseudoRecFibonacci)
+				memoizedFibonacci(5) shouldBe 5
+				callCount shouldBe 5
+				//f(5) = f(4) + f(3) ; calls = 1
+				//|      f(4) = f(3) + f(2) ; calls = 2
+				//|      |      f(3) = f(2) + f(1) ; calls = 3
+				//|      |      |      f(2) = 1 ; calls = 4
+				//|      |      |      f(1) = 1 ; calls = 5
+				//|      |      2    + f(2) = cache(2) = 1 => no call ; calls = 5
+				//|      3   +  f(3) = cache(3) = 2 => no call ; calls = 5
+				//5
+				//
 			}
 		}
 	}
